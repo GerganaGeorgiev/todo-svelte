@@ -3,10 +3,11 @@
   import trashIcon from "../../assets/icons/trash.png";
   import type { ITodo } from "../models/todoModel";
   import { todosStore } from "../stores/todosStore";
+  import type { TodoColors } from "../models/types";
 
   export let singleTodo: ITodo;
 
-  function handleColorSelected(event: { detail: { color: string } }) {
+  function handleColorSelected(event: { detail: { color: TodoColors } }) {
     const selectedColor = event.detail.color;
 
     singleTodo = { ...singleTodo, color: selectedColor };
@@ -28,15 +29,13 @@
 
   function handleToDoCompletion(id: number) {
     todosStore.update((prev) => {
-      const currentTodo = prev.find((el) => el.id === id);
-      console.log(currentTodo);
-      return [
-        {
-          ...currentTodo,
-          completed: !currentTodo?.completed,
-        },
-        ...prev,
-      ];
+      return prev.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: todo.completed };
+        } else {
+          return todo;
+        }
+      });
     });
   }
 </script>
@@ -52,7 +51,9 @@
     <input
       bind:checked={singleTodo.completed}
       type="checkbox"
-      on:change={() => handleToDoCompletion(singleTodo.id)}
+      on:change={() => {
+        handleToDoCompletion(singleTodo.id);
+      }}
     />
     <p class="todo-content">{singleTodo.title}</p>
     <ColorPalette on:colorSelected={handleColorSelected} isFilterContext={false}

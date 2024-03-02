@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import ColorPalette from "./ColorPalette.svelte";
-  import type { Filter } from "../models/types";
+  import type { Filter, TodoColors } from "../models/types";
 
   const dispatch = createEventDispatcher();
 
-  function handleColorSelected(event: { detail: { color: string } }) {
+  function handleColorSelected(event: { detail: { color: TodoColors } }) {
     const selectedColor = event.detail.color;
     dispatch("filterSelected", { filter: selectedColor });
   }

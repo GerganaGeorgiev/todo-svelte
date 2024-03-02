@@ -16,8 +16,8 @@
 
   let todos: ITodo[];
 
-  let derivedStoreSubscription: StoreSubscription;
   let initialDataSubscription: StoreSubscription;
+  let derivedStoreSubscription: StoreSubscription;
 
   initialDataSubscription = todosStore.subscribe((value: ITodo[]) => {
     todos = value;
@@ -25,6 +25,10 @@
 
   function handleFilterSelected(event: { detail: { filter: Filter } }) {
     const selectedFilter = event.detail.filter;
+
+    if (derivedStoreSubscription) {
+      derivedStoreSubscription();
+    }
 
     if (selectedFilter == "resolved") {
       derivedStoreSubscription = resolvedTodosStore.subscribe(

@@ -1,12 +1,13 @@
 <script lang="ts">
   import { todosStore } from "../stores/todosStore";
+  import { v4 as uuidv4 } from "uuid";
 
   function addTodo() {
     todosStore.update((prev) => {
       return [
         {
           userId: prev.length + 1,
-          id: prev.length + 1,
+          id: uuidv4(),
           title: todoTitle,
           completed: false,
         },
