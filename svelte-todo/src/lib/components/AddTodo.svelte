@@ -1,34 +1,20 @@
 <script lang="ts">
   import { todosStore } from "../stores/todosStore";
 
-  function addTodo(
-    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-  ) {
-    fetch("https://jsonplaceholder.typicode.com/todos", {
-      method: "POST",
-      body: JSON.stringify({
-        title: event.target,
-        completed: false,
-        userId: window.crypto.randomUUID(),
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-
+  function addTodo() {
     todosStore.update((prev) => {
       return [
         {
           userId: prev.length + 1,
-          id: prev.length + 20,
-          title: toDoTitle,
+          id: prev.length + 1,
+          title: todoTitle,
           completed: false,
         },
         ...prev,
       ];
     });
+
+    todoTitle = "";
   }
 
   function validateInput(text: string) {
@@ -37,17 +23,17 @@
     }
   }
 
-  let toDoTitle: string;
+  let todoTitle: string;
 </script>
 
 <div class="add-todo-card">
   <input
     on:input={() => validateInput(event?.target.value)}
-    bind:value={toDoTitle}
+    bind:value={todoTitle}
     type="text"
     placeholder="What needs to be done?"
   />
-  {#if !toDoTitle}
+  {#if !todoTitle}
     <button on:click={addTodo} disabled>Add</button>
   {:else}
     <button on:click={addTodo}>Add</button>

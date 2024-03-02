@@ -10,13 +10,21 @@
 
   function handleColorSelected(event: { detail: { color: string } }) {
     const selectedColor = event.detail.color;
-    console.log(event);
+
+    singleTodo = { ...singleTodo, color: selectedColor };
+
+    todosStore.update((todos) => {
+      return todos.map((todo) => {
+        if (todo.id === singleTodo.id) {
+          return { ...todo, color: selectedColor };
+        }
+        return todo;
+      });
+    });
+
     switch (selectedColor) {
       case "red":
         className = "red";
-        // todosStore.update((prev) => {
-        //   return prev;
-        // });
         break;
       case "blue":
         className = "blue";
@@ -50,25 +58,6 @@
         ...prev,
       ];
     });
-
-    // const inputElement = event.target as HTMLInputElement;
-    // const index = +inputElement.dataset.index!;
-
-    // console.log(inputElement);
-    // todosStore.update((prev: any) => {
-    //   const checkedEl = prev[index];
-    //   // burka elementa , koito izbiram
-    //   console.log(checkedEl);
-    //   return [{ ...checkedEl, completed: inputElement.checked }, ...prev];
-
-    // return prev.map((todo, i) => {
-    //   if (i === index) {
-    //     console.log(todo);
-    //     return { ...todo, completed: inputElement.checked };
-    //   }
-    //   return todo;
-    // });
-    // });
   }
 </script>
 

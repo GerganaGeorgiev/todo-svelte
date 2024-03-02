@@ -38,8 +38,6 @@
     background-color: #f8f8f8;
     margin-top: 100px;
     margin-left: 20px;
-    /* width: 200px; */
-    /* flex-shrink: 0; */
   }
 
   .side-bar button {

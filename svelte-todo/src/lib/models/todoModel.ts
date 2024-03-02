@@ -4,4 +4,5 @@ export interface ITodo {
   title: string;
   completed: boolean;
   color?: string;
+  colorChange?: boolean;
 }

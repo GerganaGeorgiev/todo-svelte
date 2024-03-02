@@ -1,37 +1,39 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { resolvedTodos, unresolvedTodos } from "../stores/todosStore";
   import ColorPalette from "./ColorPalette.svelte";
+  import type { Filter } from "../models/types";
+
+  const dispatch = createEventDispatcher();
 
   function handleColorSelected(event: { detail: { color: string } }) {
     const selectedColor = event.detail.color;
-  }
-  const dispatch = createEventDispatcher();
-
-  function handleFilterButtonClick(value: string) {
-    dispatch("filterSelected", { value });
-    console.log("clicked");
+    dispatch("filterSelected", { filter: selectedColor });
   }
 
-  function clearFilter() {}
+  function handleFilterButtonClick(filter: Filter) {
+    dispatch("filterSelected", { filter });
+  }
 </script>
 
 <div class="filter-card">
   <h3 class="filter-title">Filter by:</h3>
   <div class="filter-buttons">
     <span
-      ><button on:click={() => handleFilterButtonClick("resolved)")}
+      ><button on:click={() => handleFilterButtonClick("resolved")}
         >Resolved</button
       ></span
     >
     <span
-      ><button on:click={() => handleFilterButtonClick("unresolved)")}
+      ><button on:click={() => handleFilterButtonClick("unresolved")}
         >Unresolved</button
       ></span
     >
     <ColorPalette on:colorSelected={handleColorSelected}></ColorPalette>
   </div>
-  <button on:click={clearFilter} class="clear-filter-btn">Clear filter</button>
+  <button
+    on:click={() => handleFilterButtonClick("none")}
+    class="clear-filter-btn">Clear filter</button
+  >
 </div>
 
 <style>
