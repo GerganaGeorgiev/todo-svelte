@@ -28,7 +28,8 @@
         >Unresolved</button
       ></span
     >
-    <ColorPalette on:colorSelected={handleColorSelected}></ColorPalette>
+    <ColorPalette on:colorSelected={handleColorSelected} isFilterContext={true}
+    ></ColorPalette>
   </div>
   <button
     on:click={() => handleFilterButtonClick("none")}

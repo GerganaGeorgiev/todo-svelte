@@ -6,13 +6,10 @@
 
   export let singleTodo: ITodo;
 
-  let className: string = "";
-
   function handleColorSelected(event: { detail: { color: string } }) {
     const selectedColor = event.detail.color;
 
     singleTodo = { ...singleTodo, color: selectedColor };
-
     todosStore.update((todos) => {
       return todos.map((todo) => {
         if (todo.id === singleTodo.id) {
@@ -21,23 +18,6 @@
         return todo;
       });
     });
-
-    switch (selectedColor) {
-      case "red":
-        className = "red";
-        break;
-      case "blue":
-        className = "blue";
-        break;
-      case "green":
-        className = "green";
-        break;
-      case "yellow":
-        className = "yellow";
-        break;
-      default:
-        className = "";
-    }
   }
 
   function handleDeleteToDo(id: number) {
@@ -63,10 +43,10 @@
 
 <div
   class="single-todo"
-  class:red={className === "red"}
-  class:green={className === "green"}
-  class:yellow={className === "yellow"}
-  class:blue={className === "blue"}
+  class:red={singleTodo?.color === "red"}
+  class:green={singleTodo?.color === "green"}
+  class:yellow={singleTodo?.color === "yellow"}
+  class:blue={singleTodo?.color === "blue"}
 >
   <div>
     <input
@@ -75,7 +55,8 @@
       on:change={() => handleToDoCompletion(singleTodo.id)}
     />
     <p class="todo-content">{singleTodo.title}</p>
-    <ColorPalette on:colorSelected={handleColorSelected}></ColorPalette>
+    <ColorPalette on:colorSelected={handleColorSelected} isFilterContext={false}
+    ></ColorPalette>
 
     <span class="delete-btn-span"
       ><button
