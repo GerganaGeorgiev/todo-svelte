@@ -2,37 +2,14 @@
   import SideBar from "./lib/components/SideBar.svelte";
   import Todos from "./lib/components/Todos.svelte";
   import AddTodo from "./lib/components/AddTodo.svelte";
-
-  //   onMount(async () => {
-  //     toDos = await getTodos();
-  //   });
-
-  //   const getTodos = async () => {
-  //     const res = await fetch("https://jsonplaceholder.typicode.com/todos");
-  //     const data = await res.json();
-  //     return data;
-  //   };
-
-  // getTodos();
-
-  function filterByColor(color: string) {}
-  function showResolved() {}
-  function showUnresolved() {}
 </script>
 
 <main>
-  <h1 class="title">Task organizer app - always know what ToDo!</h1>
+  <h1 class="title">Task organizer-always know what To Do!</h1>
   <div class="container">
-    <!-- 
-        {#await toDos}
-        <p>Loading...</p>
-        {:then data} -->
     <div class="todos-container">
       <AddTodo></AddTodo>
-
       <Todos></Todos>
-
-      <!-- {/await} -->
     </div>
     <SideBar></SideBar>
   </div>
@@ -49,6 +26,7 @@
   .title {
     text-align: center;
     margin: auto;
+    margin-top: 30px;
   }
 
   .container {

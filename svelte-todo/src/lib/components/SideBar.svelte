@@ -46,13 +46,13 @@
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    background-color: #efae12;
+    background-color: #804c59;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   .side-bar button:hover {
-    background-color: #43ace9;
+    background-color: #abacaf;
   }
 </style>

@@ -21,13 +21,13 @@
     });
   }
 
-  function handleDeleteToDo(id: number) {
+  function handleDeleteToDo(id: number | string) {
     todosStore.update((prev) => {
       return prev.filter((el) => el.id !== id);
     });
   }
 
-  function handleToDoCompletion(id: number) {
+  function handleToDoCompletion(id: number | string) {
     todosStore.update((prev) => {
       return prev.map((todo) => {
         if (todo.id === id) {
